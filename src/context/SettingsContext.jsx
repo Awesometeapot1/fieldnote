@@ -5,6 +5,7 @@ import { COPY } from '../data/copy'
 
 const DYSLEXIA_KEY = 'fieldnote_dyslexia_v1'
 const TONE_KEY = 'fieldnote_tone_v1' // 'playful' | 'plain'
+const WELLBEING_NUDGES_KEY = 'fieldnote_wellbeing_nudges_v1'
 
 const SettingsContext = createContext(null)
 
@@ -24,6 +25,13 @@ export function SettingsProvider({ children }) {
     }
   })
   const [labelOverrides, setLabelOverrides] = useState(() => loadLabelOverrides())
+  const [wellbeingNudgesEnabled, setWellbeingNudgesEnabled] = useState(() => {
+    try {
+      return localStorage.getItem(WELLBEING_NUDGES_KEY) !== '0'
+    } catch {
+      return true
+    }
+  })
 
   useEffect(() => {
     document.body.classList.toggle('dyslexia-mode', dyslexiaMode)
@@ -33,6 +41,15 @@ export function SettingsProvider({ children }) {
       // ignore
     }
   }, [dyslexiaMode])
+
+  const setWellbeingNudges = useCallback((enabled) => {
+    setWellbeingNudgesEnabled(enabled)
+    try {
+      localStorage.setItem(WELLBEING_NUDGES_KEY, enabled ? '1' : '0')
+    } catch {
+      // ignore
+    }
+  }, [])
 
   const setTone = useCallback((next) => {
     setToneState(next)
@@ -82,8 +99,22 @@ export function SettingsProvider({ children }) {
       resetAllLabels,
       shortLabel,
       t,
+      wellbeingNudgesEnabled,
+      setWellbeingNudges,
     }),
-    [dyslexiaMode, tone, labelOverrides, setTone, setLabel, resetLabel, resetAllLabels, shortLabel, t]
+    [
+      dyslexiaMode,
+      tone,
+      labelOverrides,
+      setTone,
+      setLabel,
+      resetLabel,
+      resetAllLabels,
+      shortLabel,
+      t,
+      wellbeingNudgesEnabled,
+      setWellbeingNudges,
+    ]
   )
 
   return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>

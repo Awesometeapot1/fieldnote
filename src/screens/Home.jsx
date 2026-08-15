@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import RabbitIcon from '../components/RabbitIcon'
 import HareIcon from '../components/HareIcon'
+import WellbeingNudge from '../components/WellbeingNudge'
 import { useCheckIn } from '../context/CheckInContext'
 import { useSettings } from '../context/SettingsContext'
 
@@ -16,6 +17,8 @@ export default function Home() {
 
   return (
     <div className="screen">
+      <WellbeingNudge />
+
       <div className="card" style={{ textAlign: 'center', padding: '32px 20px' }}>
         <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginBottom: 16 }}>
           <RabbitIcon size={56} />

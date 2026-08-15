@@ -4,7 +4,7 @@ import { SIGNALS } from '../data/signals'
 import { loadHistory, clearHistory } from '../lib/storage'
 
 export default function Settings() {
-  const { dyslexiaMode, setDyslexiaMode, tone, setTone } = useSettings()
+  const { dyslexiaMode, setDyslexiaMode, tone, setTone, wellbeingNudgesEnabled, setWellbeingNudges } = useSettings()
 
   return (
     <div className="screen">
@@ -17,6 +17,16 @@ export default function Settings() {
           hint="Swaps body and header text to OpenDyslexic."
           checked={dyslexiaMode}
           onChange={setDyslexiaMode}
+        />
+      </div>
+
+      <div className="card">
+        <div className="eyebrow">Wellbeing check-ins</div>
+        <ToggleRow
+          label="Notice outside-window patterns"
+          hint="Shows a dismissible card on Home if 3+ check-ins in 7 days land outside your window of tolerance, with a link to find support. Not a diagnosis — just a count of what you've logged."
+          checked={wellbeingNudgesEnabled}
+          onChange={setWellbeingNudges}
         />
       </div>
 

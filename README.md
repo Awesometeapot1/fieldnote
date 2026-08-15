@@ -38,6 +38,29 @@ wellness tool. A transparent, editable rule table lets you see *why* an
 emotion was suggested and correct it if it's wrong — more trustworthy than
 an opaque model, and honest about what this project actually does.
 
+## Noticing patterns responsibly
+
+Home shows a dismissible nudge when 3+ check-ins in the last 7 days land
+outside your window of tolerance (too high or too low). The rule is
+deliberately this narrow and stated in plain numbers in the UI itself:
+
+- It's a **frequency count of what you already logged**, not an inference
+  about your state — same transparent-lookup-table principle as the
+  emotion matching itself.
+- It **is not, and does not attempt to be, a crisis or self-harm risk
+  detector.** Body-sensation self-report has no reliable signal for that,
+  and a wellness app implying otherwise would be actively irresponsible.
+  If you need that kind of support, please use a real crisis line, not an
+  app like this one.
+- It points to [findahelpline.com](https://findahelpline.com) (routes by
+  country) rather than assuming a locale, and never diagnoses or contacts
+  anyone on your behalf — there's no backend to do that even if it wanted
+  to.
+- Dismissing it only re-shows on a **new** qualifying check-in — it won't
+  nag on every app open, but it also won't stay silent through an ongoing
+  pattern just because you dismissed it once.
+- Fully optional — turn it off in Settings.
+
 ## Personalization
 
 - **Sensation wording** is editable per-signal in Settings — rename any

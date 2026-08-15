@@ -476,6 +476,10 @@ textarea:focus, input[type="text"]:focus, .chip:focus-visible, .btn:focus-visibl
   opacity: 0.7;
 }
 
+.wellbeing-nudge {
+  border-left: 3px solid var(--soft-lilac);
+}
+
 .stat-figure {
   font-size: 48px;
   font-weight: 600;
