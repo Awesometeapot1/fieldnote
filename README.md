@@ -70,11 +70,22 @@ illustrations throughout — field-guide, not cartoon.
 ## Sensation → emotion signature table
 
 Cross-referenced from emotion/body-signal education charts into a shared
-vocabulary of 21 body signals. Each emotion has a "signature" (the subset
-of signals it commonly shows up as); matching is a simple overlap count —
-you check off what you're noticing, the app ranks emotions by how many
-signature signals matched. See `src/data/signals.js` and
-`src/data/emotions.js`.
+vocabulary of 21 body signals, covering 14 emotions (8 core + 6 stretch:
+Shocked, Confused, Excited, Disgust, Shame, Cold). Each emotion has a
+"signature" (the subset of signals it commonly shows up as); matching is a
+simple overlap count — you check off what you're noticing, the app ranks
+emotions by how many signature signals matched. See `src/data/signals.js`
+and `src/data/emotions.js`.
+
+Anxious and Excited deliberately share most of their signature (racing
+heart, fast breathing, restless body) — that's not a matching bug, it
+mirrors a well-documented finding that high physiological arousal is
+genuinely ambiguous between the two states, differentiated by context and
+appraisal rather than the body signals alone (the classic
+misattribution-of-arousal line of affect research). Cold is included
+alongside Tired as a physical-state entry, not an emotion, per the Humber
+NHS framing below (recognising hunger/tiredness as commonly-confused
+physical states is itself an interoception skill).
 
 ## Sources
 
@@ -96,6 +107,11 @@ signature signals matched. See `src/data/signals.js` and
   and Mahler et al. 2022 (practicing linking body signals to emotions
   improved emotional regulation in autistic children); introduces the
   "Interoception Pyramid" this app's mechanic follows.
+- Lindsay Braman, Emotion Sensation Wheel (lindsaybraman.com) — a
+  clinician-made body-sensation reference used for the 6 stretch emotions'
+  signatures (Shocked, Confused, Excited, Disgust, Shame); same tier as the
+  general vocabulary charts below — inspiration for wording, not a
+  peer-reviewed claim.
 - Humber Sensory Processing Hub (Humber Teaching NHS Foundation Trust) — an
   NHS clinical service page confirming the tight-chest + racing-heart +
   tense-muscles → anxiety signal combination this app is built around.

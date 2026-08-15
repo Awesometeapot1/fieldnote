@@ -83,6 +83,82 @@ export const EMOTIONS = [
       { id: 'headphones', label: 'Headphones or somewhere quieter', hint: 'Cuts down the sensory load fast.' },
     ],
   },
+
+  // Stretch set — signatures cross-referenced against Lindsay Braman's
+  // Emotion Sensation Wheel (lindsaybraman.com), a clinician-made body-
+  // sensation reference, same tier of source as the general vocabulary
+  // charts already noted in the project sourcing (inspiration for wording,
+  // not a peer-reviewed claim). Mapped onto the existing 21-signal
+  // vocabulary rather than inventing new signal types.
+  {
+    id: 'shocked',
+    label: 'Shocked',
+    signature: ['frozen', 'heartPounding', 'fastBreathing', 'sweating'],
+    windowPosition: 88,
+    regulation: [
+      { id: 'sitComfortably', label: 'Sit down, name a few things you can see', hint: 'Orienting to the room helps the nervous system catch up after a jolt.' },
+      { id: 'water', label: 'Cold water on your hands or wrists', hint: 'Same quick reset that works for a startle response.' },
+    ],
+  },
+  {
+    id: 'confused',
+    label: 'Confused',
+    signature: ['cloudyMind', 'frozen', 'fidgety'],
+    windowPosition: 45,
+    regulation: [
+      { id: 'sitComfortably', label: 'Pause instead of pushing through', hint: "Confusion usually clears with a beat, not more effort." },
+      { id: 'walk', label: 'Step away and come back to it', hint: 'Distance often makes the confusing thing clearer.' },
+    ],
+  },
+  {
+    id: 'excited',
+    label: 'Excited',
+    // Overlaps heavily with Anxious/Afraid on purpose — the physiological
+    // signature of high arousal is genuinely ambiguous between "excited"
+    // and "anxious" (classic misattribution-of-arousal finding in affect
+    // research); the app surfacing both as candidates here is accurate,
+    // not a matching bug.
+    signature: ['heartPounding', 'fastBreathing', 'talkingFast', 'fidgety'],
+    windowPosition: 70,
+    regulation: [
+      { id: 'walk', label: 'Let some of that energy move', hint: "Doesn't have to go anywhere — moving helps it land somewhere." },
+      { id: 'nothing', label: 'Nothing right now', hint: 'Excitement usually just needs noticing, not regulating.' },
+    ],
+  },
+  {
+    id: 'disgust',
+    label: 'Disgust',
+    signature: ['moveAway', 'butterflies', 'heavyChest', 'shaking'],
+    windowPosition: 62,
+    regulation: [
+      { id: 'stepOutside', label: 'Get some distance from it', hint: 'Physical distance mirrors what disgust is already telling you to do.' },
+      { id: 'water', label: 'Rinse your hands or splash water on your face', hint: 'A concrete physical reset for a very physical reaction.' },
+    ],
+  },
+  {
+    id: 'shame',
+    label: 'Shame',
+    signature: ['lookingDown', 'moveAway', 'heavySlow'],
+    windowPosition: 32,
+    regulation: [
+      { id: 'sitComfortably', label: 'Somewhere soft, no pressure to explain', hint: 'Shame tends to shrink with unhurried company — even just your own.' },
+      { id: 'water', label: 'A glass of water, then decide what next', hint: 'Small and doable, before anything bigger.' },
+    ],
+  },
+  {
+    id: 'cold',
+    label: 'Cold',
+    // Not from the sensation wheel — a physical-state entry alongside
+    // Tired, per the Humber NHS interoception page already cited (which
+    // lists recognising hunger/thirst/tiredness as commonly-confused
+    // physical states, not just emotions).
+    signature: ['shivering', 'heavySlow'],
+    windowPosition: 22,
+    regulation: [
+      { id: 'warmUp', label: 'Something warm — a blanket, a hot drink', hint: "Worth ruling out before assuming it's something else." },
+      { id: 'sitComfortably', label: 'Sit somewhere warmer', hint: 'Simple, and easy to actually do.' },
+    ],
+  },
 ]
 
 export const EMOTION_BY_ID = Object.fromEntries(EMOTIONS.map((e) => [e.id, e]))
@@ -95,4 +171,5 @@ export const REGULATION_OPTIONS = [
   { id: 'headphones', label: 'Headphones' },
   { id: 'sitComfortably', label: 'Sit somewhere comfortable' },
   { id: 'nothing', label: 'Nothing right now' },
+  { id: 'warmUp', label: 'Warm up' },
 ]
