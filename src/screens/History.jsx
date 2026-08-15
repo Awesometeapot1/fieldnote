@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import HareIcon from '../components/HareIcon'
+import BarChart from '../components/BarChart'
 import { loadHistory } from '../lib/storage'
+import { tallyBy, rankTally } from '../lib/insights'
 import { EMOTION_BY_ID } from '../data/emotions'
 import { regionLabel } from '../data/regions'
 import { useSettings } from '../context/SettingsContext'
@@ -12,6 +14,7 @@ export default function History() {
   const navigate = useNavigate()
   const history = useMemo(() => loadHistory(), [])
   const [visible, setVisible] = useState(PAGE_SIZE)
+  const [view, setView] = useState('timeline')
   const { t } = useSettings()
 
   return (
@@ -29,19 +32,73 @@ export default function History() {
         </div>
       ) : (
         <>
-          <div className="stack">
-            {history.slice(0, visible).map((entry) => (
-              <HistoryCard key={entry.id} entry={entry} />
-            ))}
-          </div>
-          {visible < history.length && (
-            <button className="btn btn-secondary" style={{ marginTop: 16 }} onClick={() => setVisible((v) => v + PAGE_SIZE)}>
-              See more history
+          <div className="chip-grid" style={{ marginBottom: 16 }}>
+            <button
+              type="button"
+              className={'chip' + (view === 'timeline' ? ' selected' : '')}
+              onClick={() => setView('timeline')}
+            >
+              Timeline
             </button>
+            <button
+              type="button"
+              className={'chip' + (view === 'trends' ? ' selected' : '')}
+              onClick={() => setView('trends')}
+            >
+              Trends
+            </button>
+          </div>
+
+          {view === 'timeline' ? (
+            <>
+              <div className="stack">
+                {history.slice(0, visible).map((entry) => (
+                  <HistoryCard key={entry.id} entry={entry} />
+                ))}
+              </div>
+              {visible < history.length && (
+                <button className="btn btn-secondary" style={{ marginTop: 16 }} onClick={() => setVisible((v) => v + PAGE_SIZE)}>
+                  See more history
+                </button>
+              )}
+            </>
+          ) : (
+            <Trends history={history} />
           )}
         </>
       )}
     </div>
+  )
+}
+
+function Trends({ history }) {
+  const emotionData = rankTally(
+    tallyBy(history, 'topEmotionId'),
+    (id) => EMOTION_BY_ID[id]?.label ?? id
+  )
+  const regionData = rankTally(tallyBy(history, 'region'), (id) => regionLabel(id))
+
+  return (
+    <>
+      <div className="card">
+        <div className="eyebrow">Check-ins logged</div>
+        <div className="stat-figure">{history.length}</div>
+      </div>
+
+      {emotionData.length > 0 && (
+        <div className="card">
+          <div className="eyebrow">Most common emotions</div>
+          <BarChart data={emotionData} colorVar="--soft-lilac" />
+        </div>
+      )}
+
+      {regionData.length > 0 && (
+        <div className="card">
+          <div className="eyebrow">Where you notice it most</div>
+          <BarChart data={regionData} colorVar="--sage-grey" />
+        </div>
+      )}
+    </>
   )
 }
 
