@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import RabbitIcon from '../components/RabbitIcon'
 import { useCheckIn } from '../context/CheckInContext'
+import { useSettings } from '../context/SettingsContext'
 import { signalsForRegion } from '../data/signals'
 import { regionLabel } from '../data/regions'
 import { matchEmotions } from '../lib/matching'
@@ -9,6 +10,7 @@ import { matchEmotions } from '../lib/matching'
 export default function SensationChips() {
   const navigate = useNavigate()
   const { region, signalIds, toggleSignal, update } = useCheckIn()
+  const { t, shortLabel } = useSettings()
 
   useEffect(() => {
     if (!region) navigate('/checkin', { replace: true })
@@ -38,9 +40,7 @@ export default function SensationChips() {
           <RabbitIcon size={26} />
         </div>
         <div className="speech">
-          Around your {regionLabel(region).toLowerCase()} — what do you
-          notice? No wrong answers, just tell me what you notice. Pick as
-          many as apply.
+          {t('chipsPromptPrefix')} {regionLabel(region).toLowerCase()} {t('chipsPromptSuffix')}
         </div>
       </div>
 
@@ -54,7 +54,7 @@ export default function SensationChips() {
               onClick={() => toggleSignal(signal.id)}
               aria-pressed={signalIds.includes(signal.id)}
             >
-              {signal.short}
+              {shortLabel(signal.id)}
             </button>
           ))}
         </div>
@@ -65,7 +65,7 @@ export default function SensationChips() {
           Continue
         </button>
         <button className="btn btn-ghost" onClick={handleContinue}>
-          I don't know — that's okay too
+          {t('chipsGhost')}
         </button>
       </div>
     </div>

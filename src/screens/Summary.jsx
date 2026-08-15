@@ -1,7 +1,8 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import HareIcon from '../components/HareIcon'
 import { useCheckIn } from '../context/CheckInContext'
-import { SIGNAL_BY_ID } from '../data/signals'
+import { useSettings } from '../context/SettingsContext'
 import { REGULATION_OPTIONS } from '../data/emotions'
 import { regionLabel } from '../data/regions'
 import { addHistoryEntry } from '../lib/storage'
@@ -9,8 +10,32 @@ import { addHistoryEntry } from '../lib/storage'
 export default function Summary() {
   const navigate = useNavigate()
   const { region, signalIds, matches, hareFeedback, regulationChoice, note, update, reset } = useCheckIn()
+  const { t, shortLabel } = useSettings()
+  const [copyStatus, setCopyStatus] = useState('')
   const topMatch = matches?.[0]
   const chosenRegulation = REGULATION_OPTIONS.find((r) => r.id === regulationChoice)
+
+  function buildSummaryText() {
+    const lines = [
+      `Fieldnote check-in — ${new Date().toLocaleString()}`,
+      `Where: ${regionLabel(region)}`,
+      `Noticed: ${signalIds.length ? signalIds.map(shortLabel).join(', ') : 'nothing specific'}`,
+      `Hare's read: ${topMatch ? topMatch.emotion.label : 'not enough signal to guess'}${hareFeedback ? ` (you said "${hareFeedback}")` : ''}`,
+    ]
+    if (chosenRegulation) lines.push(`Trying: ${chosenRegulation.label}`)
+    if (note) lines.push(`Note: ${note}`)
+    return lines.join('\n')
+  }
+
+  async function handleCopy() {
+    const text = buildSummaryText()
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopyStatus('Copied to clipboard.')
+    } catch {
+      setCopyStatus('Could not copy — clipboard access unavailable.')
+    }
+  }
 
   function handleDone() {
     addHistoryEntry({
@@ -32,7 +57,7 @@ export default function Summary() {
         <div className="icon-wrap">
           <HareIcon size={26} />
         </div>
-        <div className="speech">Here's what we noticed, for the record.</div>
+        <div className="speech">{t('summaryIntro')}</div>
       </div>
 
       <div className="card stack">
@@ -46,7 +71,7 @@ export default function Summary() {
             {signalIds.length ? (
               signalIds.map((id) => (
                 <span key={id} className="tag sage">
-                  {SIGNAL_BY_ID[id].short}
+                  {shortLabel(id)}
                 </span>
               ))
             ) : (
@@ -82,9 +107,15 @@ export default function Summary() {
         />
       </div>
 
-      <button className="btn btn-primary" onClick={handleDone}>
-        Done
-      </button>
+      <div className="stack">
+        <button className="btn btn-primary" onClick={handleDone}>
+          Done
+        </button>
+        <button className="btn btn-ghost" onClick={handleCopy}>
+          Copy summary
+        </button>
+        {copyStatus && <p className="muted" style={{ textAlign: 'center', marginBottom: 0 }}>{copyStatus}</p>}
+      </div>
     </div>
   )
 }

@@ -17,9 +17,14 @@ export function matchEmotions(selectedSignalIds, { max = 3 } = {}) {
 }
 
 // Plain-language explanation, e.g. "tight jaw + fast breathing + restless
-// body often shows up as anxious for you."
-export function explainMatch(match) {
-  const shortLabels = match.matched.slice(0, 3).map((id) => SIGNAL_BY_ID[id].short)
+// body often shows up as anxious for you." `getShort` lets callers apply a
+// user's own vocabulary overrides; `tone` picks the playful/plain phrasing.
+export function explainMatch(match, { tone = 'playful', getShort } = {}) {
+  const lookup = getShort ?? ((id) => SIGNAL_BY_ID[id].short)
+  const shortLabels = match.matched.slice(0, 3).map(lookup)
   const joined = shortLabels.join(' + ')
-  return `${joined} often shows up as ${match.emotion.label.toLowerCase()} for you.`
+  const emotion = match.emotion.label.toLowerCase()
+  return tone === 'plain'
+    ? `${joined} — commonly matches ${emotion}.`
+    : `${joined} often shows up as ${emotion} for you.`
 }

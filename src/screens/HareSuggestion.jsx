@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import HareIcon from '../components/HareIcon'
 import { useCheckIn } from '../context/CheckInContext'
+import { useSettings } from '../context/SettingsContext'
 import { REGULATION_OPTIONS } from '../data/emotions'
 
 export default function HareSuggestion() {
   const navigate = useNavigate()
   const { matches, regulationChoice, update } = useCheckIn()
+  const { t } = useSettings()
   const topMatch = matches?.[0]
 
   const suggested = topMatch?.emotion.regulation ?? []
@@ -22,7 +24,7 @@ export default function HareSuggestion() {
         <div className="icon-wrap">
           <HareIcon size={26} />
         </div>
-        <div className="speech">What sounds least annoying right now?</div>
+        <div className="speech">{t('suggestionPrompt')}</div>
       </div>
 
       {suggested.length > 0 && (
@@ -64,7 +66,7 @@ export default function HareSuggestion() {
       </div>
 
       <p className="muted" style={{ textAlign: 'center' }}>
-        You can always change your mind.
+        {t('suggestionFooter')}
       </p>
 
       <button className="btn btn-primary" onClick={() => navigate('/checkin/summary')}>

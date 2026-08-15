@@ -2,10 +2,12 @@ import { useNavigate } from 'react-router-dom'
 import RabbitIcon from '../components/RabbitIcon'
 import BodyOutline from '../components/BodyOutline'
 import { useCheckIn } from '../context/CheckInContext'
+import { useSettings } from '../context/SettingsContext'
 
 export default function BodyTap() {
   const navigate = useNavigate()
   const { region, update } = useCheckIn()
+  const { t } = useSettings()
 
   function selectRegion(regionId) {
     update({ region: regionId, signalIds: [] })
@@ -24,10 +26,7 @@ export default function BodyTap() {
         <div className="icon-wrap">
           <RabbitIcon size={26} />
         </div>
-        <div className="speech">
-          Quick check — where's something happening in your body right now?
-          Tap wherever you notice it.
-        </div>
+        <div className="speech">{t('bodyTapPrompt')}</div>
       </div>
 
       <div className="card">

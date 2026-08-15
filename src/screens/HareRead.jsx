@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import HareIcon from '../components/HareIcon'
 import PatternCallout from '../components/PatternCallout'
 import { useCheckIn } from '../context/CheckInContext'
+import { useSettings } from '../context/SettingsContext'
 import { explainMatch } from '../lib/matching'
 import { loadHistory, findPattern } from '../lib/storage'
 
@@ -15,6 +16,7 @@ const FEEDBACK_OPTIONS = [
 export default function HareRead() {
   const navigate = useNavigate()
   const { matches, hareFeedback, update, signalIds } = useCheckIn()
+  const { tone, shortLabel, t } = useSettings()
 
   useEffect(() => {
     if (!matches) navigate('/checkin', { replace: true })
@@ -48,14 +50,14 @@ export default function HareRead() {
         <div>
           <div className="eyebrow">Hare's read</div>
           {topMatch ? (
-            <div className="speech" style={{ textTransform: 'capitalize' }}>
-              {explainMatch(topMatch).charAt(0).toUpperCase() + explainMatch(topMatch).slice(1)}
+            <div className="speech">
+              {(() => {
+                const explanation = explainMatch(topMatch, { tone, getShort: shortLabel })
+                return explanation.charAt(0).toUpperCase() + explanation.slice(1)
+              })()}
             </div>
           ) : (
-            <div className="speech">
-              Not much to go on this time — that's fine too. Sometimes just
-              noticing nothing clearly is the useful part.
-            </div>
+            <div className="speech">{t('hareReadNoMatch')}</div>
           )}
         </div>
       </div>
@@ -76,7 +78,7 @@ export default function HareRead() {
       {topMatch && (
         <div className="card">
           <p className="muted" style={{ marginBottom: 12 }}>
-            I could be wrong — tell me if this doesn't feel right.
+            {t('hareReadFeedbackPrompt')}
           </p>
           <div className="chip-grid">
             {FEEDBACK_OPTIONS.map((opt) => (

@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import HareIcon from '../components/HareIcon'
 import WindowBar from '../components/WindowBar'
 import { useCheckIn } from '../context/CheckInContext'
-import { SIGNAL_BY_ID } from '../data/signals'
+import { useSettings } from '../context/SettingsContext'
 import { edgeMessage } from '../lib/windowOfTolerance'
 
 export default function WindowOfTolerance() {
   const navigate = useNavigate()
   const { matches, signalIds, update } = useCheckIn()
+  const { tone, shortLabel } = useSettings()
 
   const topMatch = matches?.[0]
   const position = topMatch ? topMatch.emotion.windowPosition : 50
@@ -31,7 +32,7 @@ export default function WindowOfTolerance() {
         <div className="icon-wrap">
           <HareIcon size={26} />
         </div>
-        <div className="speech">{edgeMessage(position)}</div>
+        <div className="speech">{edgeMessage(position, tone)}</div>
       </div>
 
       <div className="card">
@@ -45,7 +46,7 @@ export default function WindowOfTolerance() {
           <div className="tag-row">
             {signalIds.map((id) => (
               <span key={id} className="tag sage">
-                {SIGNAL_BY_ID[id].short}
+                {shortLabel(id)}
               </span>
             ))}
           </div>

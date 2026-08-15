@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import HareIcon from '../components/HareIcon'
 import { loadHistory } from '../lib/storage'
 import { EMOTION_BY_ID } from '../data/emotions'
-import { SIGNAL_BY_ID } from '../data/signals'
 import { regionLabel } from '../data/regions'
+import { useSettings } from '../context/SettingsContext'
 
 const PAGE_SIZE = 6
 
@@ -12,19 +12,17 @@ export default function History() {
   const navigate = useNavigate()
   const history = useMemo(() => loadHistory(), [])
   const [visible, setVisible] = useState(PAGE_SIZE)
+  const { t } = useSettings()
 
   return (
     <div className="screen">
       <h1>Hare remembers</h1>
-      <p className="muted">Your check-in history, kept only on this device.</p>
+      <p className="muted">{t('historySub')}</p>
 
       {history.length === 0 ? (
         <div className="card" style={{ textAlign: 'center' }}>
           <HareIcon size={40} />
-          <p style={{ marginTop: 12, marginBottom: 16 }}>
-            Nothing logged yet. Once you've done a few check-ins, patterns
-            will start showing up here.
-          </p>
+          <p style={{ marginTop: 12, marginBottom: 16 }}>{t('historyEmpty')}</p>
           <button className="btn btn-primary" onClick={() => navigate('/checkin')}>
             Start a check-in
           </button>
@@ -48,6 +46,7 @@ export default function History() {
 }
 
 function HistoryCard({ entry }) {
+  const { shortLabel } = useSettings()
   const emotion = entry.topEmotionId ? EMOTION_BY_ID[entry.topEmotionId] : null
   const date = new Date(entry.date)
   const dateLabel = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
@@ -63,7 +62,7 @@ function HistoryCard({ entry }) {
       <div className="tag-row">
         {(entry.signalIds ?? []).map((id) => (
           <span key={id} className="tag sage">
-            {SIGNAL_BY_ID[id]?.short ?? id}
+            {shortLabel(id)}
           </span>
         ))}
       </div>

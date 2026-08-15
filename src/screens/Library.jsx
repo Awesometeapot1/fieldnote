@@ -1,17 +1,16 @@
 import { useState } from 'react'
 import { EMOTIONS } from '../data/emotions'
-import { SIGNALS, SIGNAL_BY_ID } from '../data/signals'
+import { SIGNALS } from '../data/signals'
+import { useSettings } from '../context/SettingsContext'
 
 export default function Library() {
   const [mode, setMode] = useState('bySignal')
+  const { t } = useSettings()
 
   return (
     <div className="screen">
       <h1>Library</h1>
-      <p className="muted">
-        The same sensation-to-emotion table the check-in uses, laid out to
-        browse. Look something up without doing a full check-in.
-      </p>
+      <p className="muted">{t('librarySub')}</p>
 
       <div className="chip-grid" style={{ marginBottom: 16 }}>
         <button
@@ -64,6 +63,7 @@ function BySignal() {
 }
 
 function ByEmotion() {
+  const { shortLabel } = useSettings()
   return (
     <div>
       {EMOTIONS.map((emotion) => (
@@ -74,7 +74,7 @@ function ByEmotion() {
             <div className="tag-row" style={{ marginBottom: 12 }}>
               {emotion.signature.map((id) => (
                 <span key={id} className="tag sage">
-                  {SIGNAL_BY_ID[id].short}
+                  {shortLabel(id)}
                 </span>
               ))}
             </div>

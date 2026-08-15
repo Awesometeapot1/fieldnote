@@ -2,10 +2,12 @@ import { useNavigate } from 'react-router-dom'
 import RabbitIcon from '../components/RabbitIcon'
 import HareIcon from '../components/HareIcon'
 import { useCheckIn } from '../context/CheckInContext'
+import { useSettings } from '../context/SettingsContext'
 
 export default function Home() {
   const navigate = useNavigate()
   const { reset } = useCheckIn()
+  const { t } = useSettings()
 
   function startCheckIn() {
     reset()
@@ -19,11 +21,8 @@ export default function Home() {
           <RabbitIcon size={56} />
           <HareIcon size={56} />
         </div>
-        <h1>Want to check in with your body?</h1>
-        <p className="muted">
-          Start from what you notice physically. Rabbit will ask a few quick
-          questions, then Hare will help make sense of it.
-        </p>
+        <h1>{t('homeHeading')}</h1>
+        <p className="muted">{t('homeSub')}</p>
         <div className="stack" style={{ marginTop: 20 }}>
           <button className="btn btn-primary" onClick={startCheckIn}>
             Start check-in
@@ -36,12 +35,7 @@ export default function Home() {
 
       <div className="card">
         <div className="eyebrow">Why body-first</div>
-        <p style={{ marginBottom: 0 }}>
-          "How are you feeling?" can be a hard question to answer directly.
-          This starts from something more concrete — what your body is
-          actually doing right now — and works backwards to a probable
-          emotion.
-        </p>
+        <p style={{ marginBottom: 0 }}>{t('homeWhy')}</p>
       </div>
     </div>
   )
