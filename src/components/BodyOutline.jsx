@@ -4,19 +4,19 @@ import { REGIONS, TAP_POINTS, regionLabel } from '../data/regions'
 export default function BodyOutline({ selectedRegion, onSelect }) {
   return (
     <div className="body-outline-wrap">
-      <svg viewBox="0 0 100 200" className="body-outline" role="presentation" aria-hidden="true">
+      <svg viewBox="0 0 100 216" className="body-outline" role="presentation" aria-hidden="true">
         {/* head */}
         <circle cx="50" cy="20" r="14" fill="none" stroke="#312F37" strokeWidth="2" />
-        {/* neck */}
-        <path d="M50 34 L50 44" stroke="#312F37" strokeWidth="2" strokeLinecap="round" />
+        {/* neck — stretched to give the throat tap point room */}
+        <path d="M50 34 L50 58" stroke="#312F37" strokeWidth="2" strokeLinecap="round" />
         {/* torso */}
-        <path d="M30 52 L70 52 L64 118 L36 118 Z" fill="none" stroke="#312F37" strokeWidth="2" strokeLinejoin="round" />
+        <path d="M30 60 L70 60 L64 128 L36 128 Z" fill="none" stroke="#312F37" strokeWidth="2" strokeLinejoin="round" />
         {/* arms */}
-        <path d="M31 54 C16 62, 13 76, 17 86" fill="none" stroke="#312F37" strokeWidth="2" strokeLinecap="round" />
-        <path d="M69 54 C84 62, 87 76, 83 86" fill="none" stroke="#312F37" strokeWidth="2" strokeLinecap="round" />
+        <path d="M31 62 C16 70, 13 84, 17 92" fill="none" stroke="#312F37" strokeWidth="2" strokeLinecap="round" />
+        <path d="M69 62 C84 70, 87 84, 83 92" fill="none" stroke="#312F37" strokeWidth="2" strokeLinecap="round" />
         {/* legs */}
-        <path d="M38 118 L41 190" fill="none" stroke="#312F37" strokeWidth="2" strokeLinecap="round" />
-        <path d="M62 118 L59 190" fill="none" stroke="#312F37" strokeWidth="2" strokeLinecap="round" />
+        <path d="M38 128 L41 198" fill="none" stroke="#312F37" strokeWidth="2" strokeLinecap="round" />
+        <path d="M62 128 L59 198" fill="none" stroke="#312F37" strokeWidth="2" strokeLinecap="round" />
       </svg>
 
       <div className="tap-points">

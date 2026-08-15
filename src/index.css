@@ -407,7 +407,7 @@ textarea:focus, input[type="text"]:focus, .chip:focus-visible, .btn:focus-visibl
 .body-outline-wrap {
   position: relative;
   width: 100%;
-  max-width: 220px;
+  max-width: 260px;
   margin: 0 auto;
 }
 
@@ -424,8 +424,8 @@ textarea:focus, input[type="text"]:focus, .chip:focus-visible, .btn:focus-visibl
 
 .tap-point {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   border: 2px solid var(--soft-lilac);

@@ -2,6 +2,11 @@
 // principle: concrete physical words ("tight", "heavy") rather than
 // evaluative ("bad", "hurt") or global/emotion words ("anxious", "pain").
 // `regions` tags which body-tap areas surface this signal as a chip.
+//
+// Entries below marked "NHS" are phrased directly from the Humber Sensory
+// Processing Hub interoception page (connect.humber.nhs.uk); entries
+// marked "Braman" are mapped from Lindsay Braman's Emotion Sensation
+// Wheel — same two sources already cited for the emotion signatures.
 export const SIGNALS = [
   { id: 'shaking', label: 'Hands shaking / trembling', short: 'shaky hands', regions: ['hands'] },
   { id: 'heartPounding', label: 'Heart pounding or racing', short: 'racing heart', regions: ['chest'] },
@@ -24,6 +29,16 @@ export const SIGNALS = [
   { id: 'cloudyMind', label: 'Mind feels cloudy or unfocused', short: 'cloudy mind', regions: ['head'] },
   { id: 'droopyEyes', label: 'Droopy eyes, yawning', short: 'droopy eyes', regions: ['head'] },
   { id: 'shivering', label: 'Shivering, hugging self', short: 'shivering', regions: ['hands', 'wholebody'] },
+  // NHS-sourced
+  { id: 'dryMouth', label: 'Mouth feels dry', short: 'dry mouth', regions: ['throat', 'jaw'] },
+  { id: 'tightChest', label: 'Chest feels tight', short: 'tight chest', regions: ['chest'] },
+  { id: 'growlingStomach', label: 'Stomach growling or hungry', short: 'growling stomach', regions: ['stomach'] },
+  { id: 'goosebumps', label: 'Goosebumps or skin prickling', short: 'goosebumps', regions: ['hands', 'wholebody'] },
+  // Braman-sourced
+  { id: 'numbness', label: 'Hands or body feel numb', short: 'numb', regions: ['hands', 'wholebody'] },
+  { id: 'headache', label: 'Headache or pressure in head', short: 'headache', regions: ['head'] },
+  { id: 'hollow', label: 'Empty or hollow feeling', short: 'hollow feeling', regions: ['stomach', 'chest', 'wholebody'] },
+  { id: 'heartSlow', label: 'Heartbeat feels slow or faint', short: 'slow heartbeat', regions: ['chest'] },
 ]
 
 export const SIGNAL_BY_ID = Object.fromEntries(SIGNALS.map((s) => [s.id, s]))

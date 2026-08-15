@@ -90,12 +90,22 @@ backend and no account.
 Headers in Fraunces (Semibold), body in Inter. Flat 2px line-art icons and
 illustrations throughout — field-guide, not cartoon.
 
+## Body regions
+
+8 tappable regions (head, jaw, throat/mouth, shoulders, chest, stomach,
+arms/hands, legs) plus "whole body" and "not sure" fallbacks. Throat/mouth
+was added specifically to house dry-mouth and hunger-related signals — the
+body outline's neck was redrawn with more room so it sits as a clearly
+separate tap target from jaw and shoulders, not squeezed in.
+
 ## Sensation → emotion signature table
 
 Cross-referenced from emotion/body-signal education charts into a shared
-vocabulary of 21 body signals, covering 14 emotions (8 core + 6 stretch:
-Shocked, Confused, Excited, Disgust, Shame, Cold). Each emotion has a
-"signature" (the subset of signals it commonly shows up as); matching is a
+vocabulary of 29 body signals (21 original + 8 added from the Humber NHS
+interoception page and the Braman sensation wheel — see Sources), covering
+15 emotions (8 core + 6 stretch + Hungry, a physical-state entry like
+Cold). Each emotion has a "signature" (the subset of signals it commonly
+shows up as); matching is a
 simple overlap count — you check off what you're noticing, the app ranks
 emotions by how many signature signals matched. See `src/data/signals.js`
 and `src/data/emotions.js`.
@@ -105,10 +115,10 @@ heart, fast breathing, restless body) — that's not a matching bug, it
 mirrors a well-documented finding that high physiological arousal is
 genuinely ambiguous between the two states, differentiated by context and
 appraisal rather than the body signals alone (the classic
-misattribution-of-arousal line of affect research). Cold is included
-alongside Tired as a physical-state entry, not an emotion, per the Humber
-NHS framing below (recognising hunger/tiredness as commonly-confused
-physical states is itself an interoception skill).
+misattribution-of-arousal line of affect research). Cold and Hungry are
+included alongside Tired as physical-state entries, not emotions, per the
+Humber NHS framing below (recognising hunger/thirst/tiredness as
+commonly-confused physical states is itself an interoception skill).
 
 ## Sources
 

@@ -17,7 +17,7 @@ export const EMOTIONS = [
   {
     id: 'anxious',
     label: 'Anxious / Nervous',
-    signature: ['fidgety', 'butterflies', 'jawClenched', 'fastBreathing'],
+    signature: ['fidgety', 'butterflies', 'jawClenched', 'fastBreathing', 'tightChest'],
     windowPosition: 75,
     regulation: [
       { id: 'breathing', label: 'One slow breath out, longer than the in-breath', hint: 'Long exhale nudges the nervous system down a notch.' },
@@ -27,7 +27,7 @@ export const EMOTIONS = [
   {
     id: 'angry',
     label: 'Angry',
-    signature: ['faceHot', 'jawClenched', 'heartPounding', 'tenseMuscles'],
+    signature: ['faceHot', 'jawClenched', 'heartPounding', 'tenseMuscles', 'headache'],
     windowPosition: 85,
     regulation: [
       { id: 'stepOutside', label: 'Step outside, even just a doorway', hint: 'A change of space interrupts the buildup.' },
@@ -37,7 +37,7 @@ export const EMOTIONS = [
   {
     id: 'sad',
     label: 'Sad',
-    signature: ['heavyChest', 'tearingUp', 'heavySlow', 'lookingDown'],
+    signature: ['heavyChest', 'tearingUp', 'heavySlow', 'lookingDown', 'hollow', 'heartSlow'],
     windowPosition: 28,
     regulation: [
       { id: 'sitComfortably', label: 'Sit somewhere soft, no pressure to talk', hint: 'Let it be there for a minute before doing anything about it.' },
@@ -93,7 +93,7 @@ export const EMOTIONS = [
   {
     id: 'shocked',
     label: 'Shocked',
-    signature: ['frozen', 'heartPounding', 'fastBreathing', 'sweating'],
+    signature: ['frozen', 'heartPounding', 'fastBreathing', 'sweating', 'goosebumps'],
     windowPosition: 88,
     regulation: [
       { id: 'sitComfortably', label: 'Sit down, name a few things you can see', hint: 'Orienting to the room helps the nervous system catch up after a jolt.' },
@@ -152,11 +152,25 @@ export const EMOTIONS = [
     // Tired, per the Humber NHS interoception page already cited (which
     // lists recognising hunger/thirst/tiredness as commonly-confused
     // physical states, not just emotions).
-    signature: ['shivering', 'heavySlow'],
+    signature: ['shivering', 'heavySlow', 'numbness'],
     windowPosition: 22,
     regulation: [
       { id: 'warmUp', label: 'Something warm — a blanket, a hot drink', hint: "Worth ruling out before assuming it's something else." },
       { id: 'sitComfortably', label: 'Sit somewhere warmer', hint: 'Simple, and easy to actually do.' },
+    ],
+  },
+  {
+    id: 'hungry',
+    label: 'Hungry',
+    // A physical-state entry, same as Cold — directly named by the Humber
+    // NHS interoception page as a commonly-confused signal ("recognising
+    // when hungry, full or thirsty" is listed as an interoception skill,
+    // not framed as an emotion).
+    signature: ['growlingStomach', 'dryMouth', 'cloudyMind'],
+    windowPosition: 40,
+    regulation: [
+      { id: 'eat', label: 'Something to eat', hint: 'Hunger can masquerade as a lot of other feelings — worth ruling out first.' },
+      { id: 'water', label: 'Glass of water', hint: 'Covers the thirst half of the equation.' },
     ],
   },
 ]
@@ -172,4 +186,5 @@ export const REGULATION_OPTIONS = [
   { id: 'sitComfortably', label: 'Sit somewhere comfortable' },
   { id: 'nothing', label: 'Nothing right now' },
   { id: 'warmUp', label: 'Warm up' },
+  { id: 'eat', label: 'Something to eat' },
 ]
